@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>International Bean Strikers</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <div class="container">
+        <h1>International Bean Strikers</h1>
+        <!--<form name="twitterForm" onsubmit="twtterAction()" method="post">-->
+        Tweet: <input id="tweetInput" type="text" name="tweetInput">
+        <button type="button" class="btn" onclick="twitterAction()">Send Tweet</button>
+        <!--</form>-->
+    </div>
+
+
+    <script>
+        var require = (function() {
+            var cache = {};
+
+            function loadScript(url) {
+                var xhr = new XMLHttpRequest(),
+                    fnBody;
+                xhr.open('get', url, false);
+                xhr.send();
+                if (xhr.status === 200 && xhr.getResponseHeader('Content-Type') === 'application/x-javascript') {
+                    fnBody = 'var exports = {};\n' + xhr.responseText + '\nreturn exports;';
+                    cache[url] = (new Function(fnBody)).call({});
+                }
+            }
+
+            function resolve(module) {
+                //TODO resolve urls
+                return module;
+            }
+
+            function require(module) {
+                var url = resolve(module);
+                if (!Object.prototype.hasOwnProperty.call(cache, url)) {
+                    loadScript(url);
+                }
+                return cache[url];
+            }
+            require.cache = cache;
+            require.resolve = resolve;
+            return require;
+        }());
+    </script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!--<script src="node_modules/twitter/lib/twitter.js"></script>-->
+    <script src="js/index.js"></script>
+</body>
+
+</html>
